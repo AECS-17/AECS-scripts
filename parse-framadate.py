@@ -26,6 +26,8 @@ data = response.readlines()
 
 # Parse the day title.
 day_title = data.pop(0).decode('utf-8').strip(",\n\r").split(",")
+day_count = min(6, len(day_title))
+
 day_people = []
 for title in day_title:
     day_people.append({
@@ -42,7 +44,7 @@ for line in data:
         assert subset == INSCRITS
         subset = ENCADRANTS
         continue
-    for i in range(0, len(day_title)):
+    for i in range(0, day_count):
         reply = line[i].strip('\"')
         if (reply in ["Yes", "Oui"]):
             day_people[i][subset].append(name)
@@ -64,7 +66,7 @@ def formatPeopleList(people):
 
 # Print the agenda.
 print("Programme de la semaine :\n")
-for i in range(0, len(day_title)):
+for i in range(0, day_count):
     print(day_title[i])
     for subset in day_people[i]:
         print(subset, ":", formatPeopleList(day_people[i][subset]))
