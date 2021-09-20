@@ -26,7 +26,7 @@ data = response.readlines()
 
 # Parse the day title.
 day_title = data.pop(0).decode('utf-8').strip(",\n\r").split(",")
-day_count = min(6, len(day_title))
+day_count = min(7, len(day_title))
 
 day_people = []
 for title in day_title:
